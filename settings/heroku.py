@@ -12,7 +12,7 @@ DATABASES = {}
 
 DATABASES['default'] = dj_database_url.config()
 
-BASE_URL = "http://vja-django.herokuapp.com/"
+BASE_URL = "http://registry-django.herokuapp.com/"
 
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
