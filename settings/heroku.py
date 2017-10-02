@@ -1,5 +1,4 @@
 from .base import *
-from .celeryconfig import *
 
 import dj_database_url
 
