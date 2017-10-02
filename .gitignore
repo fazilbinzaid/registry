@@ -1,0 +1,14 @@
+__pycache__
+*/__pycache__
+*/*/__pycache__
+*/*/*/__pycache__
+*.cache
+.cache
+*/*.cache
+*/.cache
+*.pyc
+*/*.pyc
+*/*/*.pyc
+*/*/*/*.pyc
+*/*/*/*/*.pyc
+*/*/*/*/*/*.pyc
