@@ -45,7 +45,10 @@ INSTALLED_APPS = [
     'django_extensions',
 
     # project
+    'src.abstract',
+    'src.constants',
     'src.accounts',
+    'src.utils',
 ]
 
 MIDDLEWARE = [
@@ -126,7 +129,7 @@ MEDIA_URL = '/documents/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'documents')
 
 
-# AUTH_USER_MODEL = 'accounts.Account'
+AUTH_USER_MODEL = 'accounts.Account'
 
 # settings to send email
 EMAIL_HOST = 'smtp.gmail.com'
