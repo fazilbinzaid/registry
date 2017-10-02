@@ -13,37 +13,37 @@ class AccountManager(BaseUserManager):
     """
     use_in_migrations = True
 
-    def _create_user(self, username, email, password, **kwargs):
+    def _create_user(self, email, password, **kwargs):
         """
         Function to create a user with given arguments.
         """
-        if not email or username:
+        if not email:
             raise ValueError('Users must have a valid email address and provide a username.')
         email = self.normalize_email(email)
-        account = self.model(username=username, email=email, password=password, **kwargs)
+        account = self.model(email=email, password=password, **kwargs)
         account.set_password(password)
         account.role, created = Role.objects.get_or_create(code='I', desc='Inactive')
         account.is_active = True
         account.save()
         return account
 
-    def create_user(self, username, email, password=None, **kwargs):
+    def create_user(self, email, password=None, **kwargs):
         """
         Top level function which calls to be called upon when a user is to be created.
         """
         kwargs.setdefault('is_superuser', False)
-        return self._create_user(username, email, password, **kwargs)
+        return self._create_user(email, password, **kwargs)
 
-    def create_superuser(self, username, email, password, **kwargs):
+    def create_superuser(self, email, password, **kwargs):
         """
         Function to create a new superuser with all permissions.
         """
-        account = self._create_user(username, email, password, **kwargs)
+        account = self._create_user(email, password, **kwargs)
         account.is_active = True
         account.is_superuser = True
         account.is_admin = True
         account.is_staff = True
-        account.role, created = Role.objects.get_or_create(code='P')
+        account.role, created = Role.objects.get_or_create(code='A')
         account.save()
 
         return account
@@ -53,10 +53,9 @@ class AccountManager(BaseUserManager):
         Overrided model's create method inorder to provide better integration with testing
         utilities like mixer, pytest and command level user creation.
         """
-        username = kwargs.pop('username')
         email = kwargs.pop('email')
         password = kwargs.pop('password')
-        user = self.create_user(username, email, password)
+        user = self.create_user(email, password)
         for key, value in kwargs.items():
             setattr(user, key, value)
         user.save()

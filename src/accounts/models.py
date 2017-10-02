@@ -31,7 +31,6 @@ class Account(AbstractBaseUser):
 
     phone_number_regex_validator = RegexValidator(regex=r'^[0-9]{10}$', message='Invalid Phone Number.')
 
-    username = models.CharField(unique=True)
     email = models.EmailField(unique=True)
     full_name = models.CharField(max_length=200)
     phone_number = models.CharField(max_length=10, validators=[phone_number_regex_validator, MinLengthValidator(10)])
@@ -51,7 +50,6 @@ class Account(AbstractBaseUser):
     objects = AccountManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username']
 
     class Meta:
         ordering = ('-id', )
