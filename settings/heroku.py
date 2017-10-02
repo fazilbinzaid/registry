@@ -1,0 +1,20 @@
+from .base import *
+from .celeryconfig import *
+
+import dj_database_url
+
+
+# TODO DEBUG = FALSE when production.
+DEBUG = True
+
+ALLOWED_HOSTS = ['*']
+
+DATABASES = {}
+
+DATABASES['default'] = dj_database_url.config()
+
+BASE_URL = "http://vja-django.herokuapp.com/"
+
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
+REST_FRAMEWORK['PAGE_SIZE'] = 15
