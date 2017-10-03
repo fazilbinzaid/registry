@@ -22,7 +22,7 @@ from django.conf.urls.static import static, serve
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
 
-    url(r'^api/accounts/', include('src.accounts.urls', namespace='accounts')),
+    url(r'^api/', include('src.accounts.urls', namespace='accounts')),
 
     url(r'^home/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),

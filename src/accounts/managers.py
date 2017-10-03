@@ -18,7 +18,7 @@ class AccountManager(BaseUserManager):
         Function to create a user with given arguments.
         """
         if not email:
-            raise ValueError('Users must have a valid email address and provide a username.')
+            raise ValueError('Users must have a valid email address.')
         email = self.normalize_email(email)
         account = self.model(email=email, password=password, **kwargs)
         account.set_password(password)

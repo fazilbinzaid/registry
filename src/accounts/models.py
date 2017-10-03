@@ -84,3 +84,14 @@ class Account(AbstractBaseUser):
 
     def __str__(self):
         return self.email
+
+
+# SIGNALS
+
+@receiver(post_save, sender=settings.AUTH_USER_MODEL)
+def create_auth_token(sender, instance=None, created=False, **kwargs):
+    """
+    Create auth token whenever a user is created.
+    """
+    if created:
+        Token.objects.create(user=instance)
