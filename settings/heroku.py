@@ -19,3 +19,5 @@ BASE_URL = "http://registry-django.herokuapp.com/"
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 REST_FRAMEWORK['PAGE_SIZE'] = 15
+
+INTERNAL_IPS = [ '127.0.0.1' ]
