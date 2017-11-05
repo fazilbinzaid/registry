@@ -12,3 +12,5 @@ __pycache__
 */*/*/*.pyc
 */*/*/*/*.pyc
 */*/*/*/*/*.pyc
+staticfiles
+static_files
