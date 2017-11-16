@@ -1,4 +1,6 @@
 from django.conf.urls import url, include
+
+# rest_framework
 from rest_framework.routers import DefaultRouter
 
 # custom imports
@@ -18,4 +20,4 @@ urlpatterns = [
     # router urls
     url(r'^', include(router.urls)),
 
-            ]
+]

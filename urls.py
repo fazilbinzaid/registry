@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
 
     url(r'^api/', include('src.accounts.urls', namespace='accounts')),
+    url(r'^api/', include('src.utils.urls', namespace='utils')),
 
     url(r'^home/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
