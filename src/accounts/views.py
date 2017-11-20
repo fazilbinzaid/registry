@@ -21,14 +21,14 @@ LINK = 'http://128.199.76.148/'
 DEMO_MANAGER = 'manager.vja@gmail.com'
 
 
-def user_logout(request):
+def user_logout_view(request):
     """
     Logs out the current user.
     """
     logout(request)
     return HttpResponseRedirect('/')
 
-class Login(APIView):
+class LoginView(APIView):
     """
     Front end authentication is via tokens. This class generates an authentication
     token for the user
@@ -67,8 +67,37 @@ class Login(APIView):
         })
 
 
+class ValidateAuthTokenView(APIView):
+    """
+    View for validating token.
+    """
 
-class ForgotPassword(APIView):
+    permission_classes = []
+
+    def post(self, request):
+        """
+        Request for Auth Token Validation must be POST.
+        """
+        success = False
+        msg = "Unknown Error"
+        try:
+            string = request.data['token']
+            try:
+                token = Token.objects.get(key=string)
+                msg = "Token validated."
+                success = True
+            except Token.DoesNotExist:
+                msg = "Token does not exist."
+
+        except Exception as e:
+            msg = str(e)
+        return Response({
+            'success': success,
+            'msg': msg
+            })
+
+
+class ForgotPasswordView(APIView):
     """
     Class to take action when a client user forgets his/her password.
     """
@@ -101,8 +130,7 @@ class ForgotPassword(APIView):
         })
 
 
-
-class ResetPassword(APIView):
+class ResetPasswordView(APIView):
     """
     View provided for requesting a password reset.
     """

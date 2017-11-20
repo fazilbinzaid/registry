@@ -171,6 +171,33 @@ class TestChangePasswordView(APITestCase):
         assert user.check_password(data['new_password'])
 
 
+class TestValidateAuthTokenView(APITestCase):
+    """
+    Test for Validate auth token view.
+    """
+
+    def setUp(self):
+        self.client = APIClient()
+
+    def test_validate_auth_token_view(self):
+        """
+        Tests whether view validates auth token.
+        """
+        admin = Account.objects.create(email='admin@app.com', password='vja1234')
+        url = reverse('accounts:validate-auth-token')
+        data = {
+            'token': admin.auth_token.key
+        }
+
+        response = self.client.post(url, data, format='json')
+        response.render()
+
+        self.assertEqual(response.status_code, 200)
+        expected_msg = "Token validated."
+        assert response.json()['success']
+        assert expected_msg == response.json()['msg']
+
+
 class TestAccountViewSet(BaseViewSetTestMixin, APITestCase):
 
     def setUp(self):
