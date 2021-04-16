@@ -6,7 +6,7 @@ curtsies==0.2.11
 dj-database-url==0.4.2
 Django==1.11.5
 django-cors-headers==2.1.0
-django-debug-toolbar==1.8
+django-debug-toolbar==1.11.1
 django-extensions==1.9.1
 djangorestframework==3.6.4
 Faker==0.7.3
